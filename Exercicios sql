@@ -1,0 +1,122 @@
+-- Exercício 1: Selecionar o nome, o sobrenome e o país dos clientes ✅
+select nome, sobrenome, pais from clientes;
+
+-- Exercício 2: Selecionar o nome, o sobrenome e o cargo dos empregados ✅
+select nome, sobrenome, cargo from empregados;
+
+-- Exercício 3: Selecionar o código, a cidade e o país dos escritórios ✅
+select escritorio_codigo, cidade, pais from escritorios;
+
+-- Exercício 4: Obter todos os clientes ✅
+select * from clientes;
+
+-- Exercício 5: Obter todos os empregados ✅
+select * from empregados;
+
+-- Exercício 6: Obter todos os escritórios ✅
+select * from escritorios;
+
+-- Exercício 7: Obter todos os produtos ✅
+select * from produtos;
+
+-- Exercício 8: Lista de clientes localizados nos EUA ✅
+select nome, sobrenome, pais from clientes where pais = 'USA';
+
+-- Exercício 9: Clientes com limite de crédito superior a 100000 ✅
+select nome, sobrenome, pais, limite_credito from clientes where limite_credito > 100000;
+
+-- Exercício 10: Selecionar os nomes dos empregados ✅
+select nome from empregados;
+
+-- Exercício 11: Escritórios localizados no Japão ✅
+select escritorio_codigo, cidade, pais from escritorios where pais = 'Japan';
+
+-- Tabelas auxiliares
+select * from pedidos;
+select * from clientes;
+
+-- Exercício 12: Código, cliente e data dos pedidos já entregues ✅
+select cliente, nome, data_pedido 
+from pedidos 
+inner join clientes on pedidos.cliente = clientes.cliente_codigo 
+where status = 'Entregue';
+
+-- Visualização de tabelas (apoio)
+select * from clientes;
+select * from pedidos;
+
+-- Exercício 16: Pedidos ainda não entregues ✅
+select cliente_codigo, nome, data_solicitada 
+from clientes 
+inner join pedidos on clientes.cliente_codigo = pedidos.cliente 
+where status <> 'Entregue';
+
+-- Exercício 14: Mostrar todos os pagamentos ✅
+select * from pagamentos;
+
+-- Exercício 14 (específico): Pagamentos do cliente de código 114 ✅
+select * from pagamentos where cliente = '114';
+
+-- Apoio
+select * from pedidos;
+select * from pagamentos;
+
+-- Exercício 15 (parcial):
+select data_pagamento, valor 
+from pagamentos 
+inner join pedidos on pagamentos.cliente = pedidos.cliente 
+where status <> 'Entregue';
+
+-- Exercício 17: Clientes localizados fora dos EUA ✅
+select nome, sobrenome, pais from clientes where pais <> 'USA';
+
+-- Exercício 18: Clientes dos EUA com limite > 100000 ✅
+select nome, sobrenome from clientes where pais = 'USA' and limite_credito > 100000;
+
+-- Exercício 19: Vendedores chefiados pelo empregado 1102 ✅
+select nome from empregados where cargo = 'vendedor' and chefe = 1102;
+
+-- Apoio
+select * from pedidos;
+
+-- Exercício 20: Pedidos entregues antes de 30/07/2003 ✅
+select cliente_codigo, nome, data_pedido 
+from clientes 
+inner join pedidos on clientes.cliente_codigo = pedidos.cliente 
+where data_entregue < '2003/07/30';
+
+-- Exercício 21: Clientes EUA (>100k) ou fora EUA (>50k) ✅
+select nome, sobrenome, pais, limite_credito 
+from clientes 
+where (pais = 'USA' and limite_credito > 100000) 
+   or (pais <> 'USA' and limite_credito > 50000);
+
+-- Exercício 22: Clientes com limite entre 50000 e 80000 ✅
+select nome, sobrenome, pais 
+from clientes 
+where limite_credito > 50000 and limite_credito < 80000;
+
+-- Apoio
+select * from produtos;
+
+-- Exercício 23: Produtos com preço de compra entre 60 e 70 ✅
+select nome, fabricante, preco_compra 
+from produtos 
+where preco_compra >= 60 and preco_compra <= 70;
+
+-- Exercício 24: Clientes com limite entre 50k e 80k (usando BETWEEN) ✅
+select nome, sobrenome, pais 
+from clientes 
+where limite_credito between 50000 and 80000;
+
+-- Exercício 25: Produtos com preço entre 60 e 70 (usando BETWEEN) ✅
+select nome, fabricante, preco_compra 
+from produtos 
+where preco_compra between 60 and 70;
+
+-- Exercício 26: Produtos com estoque menor que 500 ou maior que 7000 (usando NOT BETWEEN) ✅
+select nome, fabricante, estoque 
+from produtos 
+where estoque not between 500 and 7000;
+
+-- Exercício 27:
