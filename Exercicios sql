@@ -120,3 +120,43 @@ from produtos
 where estoque not between 500 and 7000;
 
 -- Exercício 27:
+select nome, sobrenome 
+from clientes
+where sobrenome like 'br%'
+
+select nome 
+from clientes
+where nome like '%chrome%'
+
+select nome, endereco1	 
+from clientes
+where endereco1 like '%baden%'
+
+select nome, telefone
+from clientes
+where nome like '%aa%'
+
+select nome 
+from produtos
+where nome like '%Ford%'
+
+select nome 
+from produtos
+where nome not like '%Ford%'
+
+select nome 
+from produtos
+where nome like '2003%'
+
+select nome
+from produtos
+where nome not like '2003%'
+
+select nome
+from clientes
+where nome like '__a%'
+
+select nome
+from clientes
+where nome like '__a_o%'
+
