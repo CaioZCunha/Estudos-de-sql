@@ -1,162 +1,365 @@
--- Exercício 1: Selecionar o nome, o sobrenome e o país dos clientes ✅
-select nome, sobrenome, pais from clientes;
+-------------------------------------------------------------
+-- EXERCÍCIO 1
+-- Selecionar o nome, o sobrenome e o país dos clientes
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais FROM clientes;
 
--- Exercício 2: Selecionar o nome, o sobrenome e o cargo dos empregados ✅
-select nome, sobrenome, cargo from empregados;
 
--- Exercício 3: Selecionar o código, a cidade e o país dos escritórios ✅
-select escritorio_codigo, cidade, pais from escritorios;
+-------------------------------------------------------------
+-- EXERCÍCIO 2
+-- Selecionar o nome, o sobrenome e o cargo dos empregados
+-------------------------------------------------------------
+SELECT nome, sobrenome, cargo FROM empregados;
 
--- Exercício 4: Obter todos os clientes ✅
-select * from clientes;
 
--- Exercício 5: Obter todos os empregados ✅
-select * from empregados;
+-------------------------------------------------------------
+-- EXERCÍCIO 3
+-- Selecionar o código, a cidade e o país dos escritórios
+-------------------------------------------------------------
+SELECT escritorio_codigo, cidade, pais FROM escritorios;
 
--- Exercício 6: Obter todos os escritórios ✅
-select * from escritorios;
 
--- Exercício 7: Obter todos os produtos ✅
-select * from produtos;
+-------------------------------------------------------------
+-- EXERCÍCIO 4
+-- Obter todos os clientes
+-------------------------------------------------------------
+SELECT * FROM clientes;
 
--- Exercício 8: Lista de clientes localizados nos EUA ✅
-select nome, sobrenome, pais from clientes where pais = 'USA';
 
--- Exercício 9: Clientes com limite de crédito superior a 100000 ✅
-select nome, sobrenome, pais, limite_credito from clientes where limite_credito > 100000;
+-------------------------------------------------------------
+-- EXERCÍCIO 5
+-- Obter todos os empregados
+-------------------------------------------------------------
+SELECT * FROM empregados;
 
--- Exercício 10: Selecionar os nomes dos empregados ✅
-select nome from empregados;
 
--- Exercício 11: Escritórios localizados no Japão ✅
-select escritorio_codigo, cidade, pais from escritorios where pais = 'Japan';
+-------------------------------------------------------------
+-- EXERCÍCIO 6
+-- Obter todos os escritórios
+-------------------------------------------------------------
+SELECT * FROM escritorios;
 
--- Tabelas auxiliares
-select * from pedidos;
-select * from clientes;
 
--- Exercício 12: Código, cliente e data dos pedidos já entregues ✅
-select cliente, nome, data_pedido 
-from pedidos 
-inner join clientes on pedidos.cliente = clientes.cliente_codigo 
-where status = 'Entregue';
+-------------------------------------------------------------
+-- EXERCÍCIO 7
+-- Obter todos os produtos
+-------------------------------------------------------------
+SELECT * FROM produtos;
 
--- Visualização de tabelas (apoio)
-select * from clientes;
-select * from pedidos;
 
--- Exercício 16: Pedidos ainda não entregues ✅
-select cliente_codigo, nome, data_solicitada 
-from clientes 
-inner join pedidos on clientes.cliente_codigo = pedidos.cliente 
-where status <> 'Entregue';
+-------------------------------------------------------------
+-- EXERCÍCIO 8
+-- Lista de clientes localizados nos EUA (USA)
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais 
+FROM clientes 
+WHERE pais = 'USA';
 
--- Exercício 14: Mostrar todos os pagamentos ✅
-select * from pagamentos;
 
--- Exercício 14 (específico): Pagamentos do cliente de código 114 ✅
-select * from pagamentos where cliente = '114';
+-------------------------------------------------------------
+-- EXERCÍCIO 9
+-- Clientes com limite de crédito superior a 100000
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais, limite_credito 
+FROM clientes 
+WHERE limite_credito > 100000;
 
--- Apoio
-select * from pedidos;
-select * from pagamentos;
 
--- Exercício 15 (parcial):
-select data_pagamento, valor 
-from pagamentos 
-inner join pedidos on pagamentos.cliente = pedidos.cliente 
-where status <> 'Entregue';
+-------------------------------------------------------------
+-- EXERCÍCIO 10
+-- Selecionar os nomes dos empregados
+-------------------------------------------------------------
+SELECT nome FROM empregados;
 
--- Exercício 17: Clientes localizados fora dos EUA ✅
-select nome, sobrenome, pais from clientes where pais <> 'USA';
 
--- Exercício 18: Clientes dos EUA com limite > 100000 ✅
-select nome, sobrenome from clientes where pais = 'USA' and limite_credito > 100000;
+-------------------------------------------------------------
+-- EXERCÍCIO 11
+-- Escritórios localizados no Japão
+-------------------------------------------------------------
+SELECT escritorio_codigo, cidade, pais 
+FROM escritorios 
+WHERE pais = 'Japan';
 
--- Exercício 19: Vendedores chefiados pelo empregado 1102 ✅
-select nome from empregados where cargo = 'vendedor' and chefe = 1102;
 
--- Apoio
-select * from pedidos;
+-------------------------------------------------------------
+-- EXERCÍCIO 12
+-- Código, cliente e data dos pedidos já entregues
+-------------------------------------------------------------
+SELECT cliente, nome, data_pedido 
+FROM pedidos 
+INNER JOIN clientes 
+    ON pedidos.cliente = clientes.cliente_codigo 
+WHERE status = 'Entregue';
 
--- Exercício 20: Pedidos entregues antes de 30/07/2003 ✅
-select cliente_codigo, nome, data_pedido 
-from clientes 
-inner join pedidos on clientes.cliente_codigo = pedidos.cliente 
-where data_entregue < '2003/07/30';
 
--- Exercício 21: Clientes EUA (>100k) ou fora EUA (>50k) ✅
-select nome, sobrenome, pais, limite_credito 
-from clientes 
-where (pais = 'USA' and limite_credito > 100000) 
-   or (pais <> 'USA' and limite_credito > 50000);
+-------------------------------------------------------------
+-- EXERCÍCIO 14
+-- Mostrar todos os pagamentos
+-------------------------------------------------------------
+SELECT * FROM pagamentos;
 
--- Exercício 22: Clientes com limite entre 50000 e 80000 ✅
-select nome, sobrenome, pais 
-from clientes 
-where limite_credito > 50000 and limite_credito < 80000;
 
--- Apoio
-select * from produtos;
+-------------------------------------------------------------
+-- EXERCÍCIO 14 (ESPECÍFICO)
+-- Pagamentos do cliente de código 114
+-------------------------------------------------------------
+SELECT * 
+FROM pagamentos 
+WHERE cliente = '114';
 
--- Exercício 23: Produtos com preço de compra entre 60 e 70 ✅
-select nome, fabricante, preco_compra 
-from produtos 
-where preco_compra >= 60 and preco_compra <= 70;
 
--- Exercício 24: Clientes com limite entre 50k e 80k (usando BETWEEN) ✅
-select nome, sobrenome, pais 
-from clientes 
-where limite_credito between 50000 and 80000;
+-------------------------------------------------------------
+-- EXERCÍCIO 15
+-- Pagamentos de pedidos NÃO entregues
+-------------------------------------------------------------
+SELECT data_pagamento, valor 
+FROM pagamentos 
+INNER JOIN pedidos 
+    ON pagamentos.cliente = pedidos.cliente 
+WHERE status <> 'Entregue';
 
--- Exercício 25: Produtos com preço entre 60 e 70 (usando BETWEEN) ✅
-select nome, fabricante, preco_compra 
-from produtos 
-where preco_compra between 60 and 70;
 
--- Exercício 26: Produtos com estoque menor que 500 ou maior que 7000 (usando NOT BETWEEN) ✅
-select nome, fabricante, estoque 
-from produtos 
-where estoque not between 500 and 7000;
+-------------------------------------------------------------
+-- EXERCÍCIO 16
+-- Pedidos ainda não entregues
+-------------------------------------------------------------
+SELECT cliente_codigo, nome, data_solicitada 
+FROM clientes 
+INNER JOIN pedidos 
+    ON clientes.cliente_codigo = pedidos.cliente 
+WHERE status <> 'Entregue';
 
--- Exercício 27:
-select nome, sobrenome 
-from clientes
-where sobrenome like 'br%'
 
-select nome 
-from clientes
-where nome like '%chrome%'
+-------------------------------------------------------------
+-- EXERCÍCIO 17
+-- Clientes localizados fora dos EUA (USA)
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais 
+FROM clientes 
+WHERE pais <> 'USA';
 
-select nome, endereco1	 
-from clientes
-where endereco1 like '%baden%'
 
-select nome, telefone
-from clientes
-where nome like '%aa%'
+-------------------------------------------------------------
+-- EXERCÍCIO 18
+-- Clientes dos EUA com limite > 100000
+-------------------------------------------------------------
+SELECT nome, sobrenome 
+FROM clientes 
+WHERE pais = 'USA' 
+  AND limite_credito > 100000;
 
-select nome 
-from produtos
-where nome like '%Ford%'
 
-select nome 
-from produtos
-where nome not like '%Ford%'
+-------------------------------------------------------------
+-- EXERCÍCIO 19
+-- Vendedores chefiados pelo empregado 1102
+-------------------------------------------------------------
+SELECT nome 
+FROM empregados 
+WHERE cargo = 'vendedor' 
+  AND chefe = 1102;
 
-select nome 
-from produtos
-where nome like '2003%'
 
-select nome
-from produtos
-where nome not like '2003%'
+-------------------------------------------------------------
+-- EXERCÍCIO 20
+-- Pedidos entregues antes de 30/07/2003
+-------------------------------------------------------------
+SELECT cliente_codigo, nome, data_pedido 
+FROM clientes 
+INNER JOIN pedidos 
+    ON clientes.cliente_codigo = pedidos.cliente 
+WHERE data_entregue < '2003/07/30';
 
-select nome
-from clientes
-where nome like '__a%'
 
-select nome
-from clientes
-where nome like '__a_o%'
+-------------------------------------------------------------
+-- EXERCÍCIO 21
+-- Clientes EUA >100k OU fora EUA >50k
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais, limite_credito 
+FROM clientes 
+WHERE (pais = 'USA' AND limite_credito > 100000)
+   OR (pais <> 'USA' AND limite_credito > 50000);
 
+
+-------------------------------------------------------------
+-- EXERCÍCIO 22
+-- Clientes com limite entre 50k e 80k (sem BETWEEN)
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais 
+FROM clientes 
+WHERE limite_credito > 50000 
+  AND limite_credito < 80000;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 23
+-- Produtos com preço de compra entre 60 e 70
+-------------------------------------------------------------
+SELECT nome, fabricante, preco_compra 
+FROM produtos 
+WHERE preco_compra >= 60 
+  AND preco_compra <= 70;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 24
+-- Clientes com limite entre 50k e 80k (com BETWEEN)
+-------------------------------------------------------------
+SELECT nome, sobrenome, pais 
+FROM clientes 
+WHERE limite_credito BETWEEN 50000 AND 80000;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 25
+-- Produtos com preço entre 60 e 70 (com BETWEEN)
+-------------------------------------------------------------
+SELECT nome, fabricante, preco_compra 
+FROM produtos 
+WHERE preco_compra BETWEEN 60 AND 70;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 26
+-- Produtos com estoque <500 ou >7000 (NOT BETWEEN)
+-------------------------------------------------------------
+SELECT nome, fabricante, estoque 
+FROM produtos 
+WHERE estoque NOT BETWEEN 500 AND 7000;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 27
+-- Filtros com LIKE
+-------------------------------------------------------------
+
+-- 27.1 Sobrenome começa com 'br'
+SELECT nome, sobrenome 
+FROM clientes 
+WHERE sobrenome LIKE 'br%';
+
+-- 27.2 Nome contém 'chrome'
+SELECT nome 
+FROM clientes 
+WHERE nome LIKE '%chrome%';
+
+-- 27.3 Endereço contém 'baden'
+SELECT nome, endereco1 
+FROM clientes 
+WHERE endereco1 LIKE '%baden%';
+
+-- 27.4 Nome da pessoa de contato contém 'aa'
+SELECT nome, telefone 
+FROM clientes 
+WHERE nome LIKE '%aa%';
+
+-- 27.5 Produtos Ford
+SELECT nome 
+FROM produtos 
+WHERE nome LIKE '%Ford%';
+
+-- 27.6 Produtos NÃO Ford
+SELECT nome 
+FROM produtos 
+WHERE nome NOT LIKE '%Ford%';
+
+-- 27.7 Produtos ano 2003
+SELECT nome 
+FROM produtos 
+WHERE nome LIKE '2003%';
+
+-- 27.8 Produtos NÃO ano 2003
+SELECT nome 
+FROM produtos 
+WHERE nome NOT LIKE '2003%';
+
+-- 27.9 Clientes com terceira letra = A
+SELECT nome 
+FROM clientes 
+WHERE nome LIKE '__a%';
+
+-- 27.10 Terceira letra = A e quinta = O
+SELECT nome 
+FROM clientes 
+WHERE nome LIKE '__a_o%';
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 37
+-- Produtos das categorias 3 e 6
+-------------------------------------------------------------
+SELECT nome, categoria 
+FROM produtos 
+WHERE categoria IN (3, 6);
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 38
+-- Clientes cujo contato seja Jean, Carine ou Diego
+-------------------------------------------------------------
+SELECT nome, telefone 
+FROM clientes 
+WHERE contato IN ('Jean', 'Carine', 'Diego');
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 39
+-- Clientes cujo país NÃO seja USA, France ou UK
+-------------------------------------------------------------
+SELECT nome, pais 
+FROM clientes 
+WHERE pais NOT IN ('USA', 'France', 'UK');
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 40
+-- Escritórios nos EUA exceto Boston e NYC
+-------------------------------------------------------------
+SELECT * 
+FROM escritorios 
+WHERE pais = 'USA' 
+  AND cidade NOT IN ('Boston', 'NYC');
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 41
+-- Empregados que não têm chefe
+-------------------------------------------------------------
+SELECT nome, cargo 
+FROM empregados 
+WHERE chefe IS NULL;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 42
+-- Clientes sem representante de vendas
+-------------------------------------------------------------
+SELECT nome, pais 
+FROM clientes 
+WHERE gerente_conta IS NULL;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 43
+-- Clientes que têm estado cadastrado
+-------------------------------------------------------------
+SELECT nome, endereco1, cidade, estado 
+FROM clientes 
+WHERE estado IS NOT NULL;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 44
+-- Produtos ordenados pelo preço sugerido
+-------------------------------------------------------------
+SELECT nome, preco_sugerido 
+FROM produtos 
+ORDER BY preco_sugerido;
+
+
+-------------------------------------------------------------
+-- EXERCÍCIO 45
+-- Produtos ordenados pelo estoque (maior → menor)
+-------------------------------------------------------------
+SELECT nome, estoque 
+FROM produtos 
+ORDER BY estoque DESC;
